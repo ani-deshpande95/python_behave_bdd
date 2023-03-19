@@ -3,3 +3,6 @@ behave -f allure_behave.formatter:AllureFormatter -o "my_report" features/login.
 
 Use below command to generate Allure report
 allure serve my_report
+
+To execute only tag specific scenarios
+behave --tags=@API -f allure_behave.formatter:AllureFormatter -o "my_report" features/login.feature

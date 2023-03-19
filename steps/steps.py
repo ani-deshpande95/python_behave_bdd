@@ -4,8 +4,6 @@ from utilities.commonSteps.webstepscommon import *
 from behave import when, then
 from utilities.commonFunctions import webcommon
 from utilities.commonConfig import qaconfig
-import requests
-import json
 
 
 @when('user enters username "{useremail}"')

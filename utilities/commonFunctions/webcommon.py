@@ -3,6 +3,7 @@ from selenium import webdriver
 import requests
 from utilities.commonConfig import qaconfig
 
+
 def go_to(url, browser_type=None):
     if not browser_type:
         driver = webdriver.Firefox()
