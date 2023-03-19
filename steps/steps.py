@@ -40,10 +40,18 @@ def assert_login(context):
 
 @given('user setup the login api data')
 def login_api_setup(context):
-    payload = {
+    context.payload = {
         "username": "test@ggggg.com",
         "password": "password1234"
     }
-    #login_response = requests.post('https://parabank.parasoft.com/parabank/login.htm', params=payload)
-    login_response = requests.get('https://reqres.in/api/user/2')
-    print(login_response.json())
+    #login_response = requests.get('https://reqres.in/api/user/2')
+
+
+@when('user request the post login API to "{baseuri}"')
+def login_api_request(context, baseuri):
+    context.api_response = webcommon.api_post_requests(context, baseuri=qaconfig.APIDATA.get(baseuri), uri='login.htm', param=context.payload)
+
+
+@then('user should be able to login successfully with status code "{status_code}"')
+def login_api_assert(context, status_code):
+    assert context.api_response.status_code == 200

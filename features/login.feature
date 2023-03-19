@@ -10,5 +10,5 @@ Feature: Login verification through UI and API
 
     Scenario: Verify login through API
       Given user setup the login api data
-      #When user request the post login API
-      #Then user should be able to login successfully
+      When user request the post login API to "parasoftbank"
+      Then user should be able to login successfully with status code "200"

@@ -1,6 +1,7 @@
 
 from selenium import webdriver
-
+import requests
+from utilities.commonConfig import qaconfig
 
 def go_to(url, browser_type=None):
     if not browser_type:
@@ -24,3 +25,15 @@ def find_element(context, element_identifier, element_locator):
     web_element = context.driver.find_element(element_identifier, element_locator)
 
     return web_element
+
+
+def api_get_requests(context, baseuri, uri, param):
+    request_uri = baseuri + uri
+    response = requests.get(url=request_uri, params=param)
+    return response
+
+
+def api_post_requests(context, baseuri, uri, param):
+    request_uri = baseuri + uri
+    response = requests.post(url=request_uri, params=param)
+    return response
