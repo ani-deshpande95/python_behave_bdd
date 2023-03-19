@@ -1,7 +1,8 @@
 # python_behave_bdd
 
 Requirements
-Python needs to be installed on your machine
+Python needs to be installed on your machine along with following dependencies
+
 behave~=1.2.6
 selenium~=4.8.2
 setuptools~=67.4.0
