@@ -4,6 +4,7 @@ from utilities.commonSteps.webstepscommon import *
 from behave import when, then
 from utilities.commonFunctions import webcommon
 from utilities.commonConfig import qaconfig
+from google.cloud import storage
 
 
 @when('user enters username "{useremail}"')
@@ -13,6 +14,7 @@ def enter_username(context, useremail):
     username.is_displayed()
     username.click()
     username.send_keys(useremail)
+    webcommon.i_wait(context, 50)
 
 
 @when('user enters password "{userpassword}"')
@@ -53,3 +55,20 @@ def login_api_request(context, baseuri):
 @then('user should be able to login successfully with status code "{status_code}"')
 def login_api_assert(context, status_code):
     assert context.api_response.status_code == 200
+
+
+@given('user provides the "{bucket_name}" bucket name')
+def step_impl(context, bucket_name):
+    storage_client = storage.Client()
+    bucket = storage_client.get_bucket(bucket_name)
+
+    blob = bucket.blob('Sample_csv.csv')
+    blob = blob.download_as_string()
+    blob = blob.decode('utf-8')
+
+    #blob = StringIO(blob)  #tranform bytes to string here
+
+    print(blob)
+    #names = csv.reader(blob)  #then use csv library to read the content
+    #for name in names:
+     #   print(f"First Name: {name[0]}")

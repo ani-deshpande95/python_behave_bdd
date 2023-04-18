@@ -8,7 +8,8 @@ def go_to(url, browser_type=None):
     if not browser_type:
         driver = webdriver.Firefox()
     elif browser_type.lower() == 'chrome':
-        driver = webdriver.Chrome()
+        driver = webdriver.Chrome(executable_path='/home/anirudhad/PycharmProjects/python_behave_bdd/resources'
+                                                  '/chromedriver_linux64/chromedriver')
     else:
         raise Exception("Incorrect browser type")
 
@@ -38,3 +39,7 @@ def api_post_requests(context, baseuri, uri, param):
     request_uri = baseuri + uri
     response = requests.post(url=request_uri, params=param)
     return response
+
+
+def i_wait(context, wait_time_in_ms):
+    context.driver.implicitly_wait(wait_time_in_ms)
