@@ -60,15 +60,16 @@ def login_api_assert(context, status_code):
 @given('user provides the "{bucket_name}" bucket name')
 def step_impl(context, bucket_name):
     storage_client = storage.Client()
-    bucket = storage_client.get_bucket(bucket_name)
+    context.bucket = storage_client.get_bucket(bucket_name)
 
-    blob = bucket.blob('Sample_csv.csv')
-    blob = blob.download_as_string()
-    blob = blob.decode('utf-8')
 
-    #blob = StringIO(blob)  #tranform bytes to string here
+@when('user provides the "{file_name}" file name')
+def step_impl(context, file_name):
+    context.blob = context.bucket.blob('Sample_csv.csv')
+    context.blob = context.blob.download_as_string()
+    context.blob = context.blob.decode('utf-8')
 
-    print(blob)
-    #names = csv.reader(blob)  #then use csv library to read the content
-    #for name in names:
-     #   print(f"First Name: {name[0]}")
+
+@then("file content should be printed to console")
+def step_impl(context):
+    print(context.blob)

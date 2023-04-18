@@ -19,5 +19,4 @@ Feature: Login verification through UI and API
   Scenario: Verify user is able to read GCS file
     Given user provides the "test_for_python" bucket name
     When user provides the "Sample_csv.csv" file name
-    #When user read the file
-    #Then file content should be printed to console
+    Then file content should be printed to console
